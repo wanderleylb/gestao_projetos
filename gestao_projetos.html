@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestão de Fases</title>
+</head>
+<body style="background-color: black; color: white; font-family: sans-serif;">
+
+  <h1>Gestão de Fases de um Projeto</h1>
+
+  <!-- Formulário para adicionar nova fase ao projeto -->
+  <h2>Adicionar Fase</h2>
+  <form id="formProjeto">
+    <!-- Campo para o nome da fase -->
+    <label>Nome da Fase:</label><br>
+    <input type="text" id="nome" required><br><br>
+
+    <!-- Campo para descrição da fase -->
+    <label>Descrição da Fase:</label><br>
+    <textarea id="descricao" required></textarea><br><br>
+
+    <!-- Campo para o status da fase -->
+    <label>Status:</label><br>
+    <select id="status">
+      <option value="a_fazer">A Fazer</option>
+      <option value="realizado">Realizado</option>
+    </select><br><br>
+
+    <!-- Botão para adicionar a fase -->
+    <button type="submit">Adicionar</button>
+  </form>
+
+  <!-- Listas de fases -->
+  <h2>📌 A Fazer</h2> <!-- Código Unicode &#x1F4CC;-->
+  <ul id="listaAFazer"></ul><!-- Código Unicode &#x2705;-->
+
+  <h2>✅ Realizados</h2>
+  <ul id="listaRealizados"></ul>
+
+  <script>
+    // Pegando os elementos do formulário e listas
+    const form = document.getElementById('formProjeto');
+    const listaAFazer = document.getElementById('listaAFazer');
+    const listaRealizados = document.getElementById('listaRealizados');
+
+    // Evento ao enviar o formulário
+    form.onsubmit = function(evento) {
+      evento.preventDefault(); // Impede recarregar a página
+
+      // Pegando os dados digitados
+      const nome = document.getElementById('nome').value;
+      const descricao = document.getElementById('descricao').value;
+      const status = document.getElementById('status').value;
+
+      // Criando um item de lista com os dados
+      const item = document.createElement('li');
+      item.textContent = `${nome}: ${descricao}`;
+
+      // Colocando na lista certa
+      if (status === 'a_fazer') {
+        listaAFazer.appendChild(item);
+      } else {
+        listaRealizados.appendChild(item);
+      }
+
+      // Limpa os campos do formulário
+      form.reset();
+    };
+  </script>
+
+</body>
+</html>
